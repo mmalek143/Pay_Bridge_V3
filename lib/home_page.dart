@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:pay_bridge/notification.dart';
-import 'package:pay_bridge/login.dart';
+//import 'package:pay_bridge/login.dart';
 
 import 'package:pay_bridge/components/card_widget.dart';
 import 'package:pay_bridge/components/button_list.dart';
 import 'package:pay_bridge/components/transaction_tile.dart';
 import 'package:pay_bridge/components/date_dialog.dart';
 import 'package:pay_bridge/components/profile_page.dart';
-import 'package:pay_bridge/scan_qr_page.dart';
+//import 'package:pay_bridge/scan_qr_page.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
