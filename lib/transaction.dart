@@ -1,28 +1,139 @@
 import 'package:flutter/material.dart';
 
 class Transaction extends StatelessWidget {
-  const Transaction({super.key});
+  Transaction({super.key});
+
+  TextEditingController datecontroller = TextEditingController();
+  String? selectedCurrencyOptions;
+  List<String> CurrencyOptions = ["USD", "LYD"];
+  String? selectedTransactionOptions;
+  List<String> TransactionOptions = [
+    "Transfer in",
+    "Transfer out",
+    "Deposit",
+    "withdraw"
+  ];
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text('Transaction')),
-      ),
-      body: ListView.builder(
-        itemCount: 20, // أو استخدم قائمة بيانات حقيقية
-        itemBuilder: (context, index) {
-          return TransactionTile(
-            size: size,
-            title: "TRANSFER IN",
-            amount: "-50 USD",
-            date: "12/2/2025 00:12:23",
-          );
-        },
+        appBar: AppBar(
+          title: const Center(child: Text('Transaction')),
+        ),
+        body: dateDialog(size, context, context));
+  }
+
+  Widget dateDialog(Size size, BuildContext context, setstste) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0, size.height - 800, 0, 0),
+      child: Center(
+        child: Container(
+          width: size.width - 80,
+          height: size.height / 2.25,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            color: const Color.fromARGB(255, 227, 222, 222),
+            boxShadow: [
+              BoxShadow(
+                color: const Color.fromARGB(255, 63, 62, 62),
+                blurRadius: 7,
+                offset: Offset(1, 2),
+              )
+            ],
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 8.0),
+                child: TextField(
+                  controller: datecontroller,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.date_range),
+                      labelText: " FROM Date "),
+                  readOnly: true,
+                  onTap: () {
+                    firstDate(context);
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 8.0),
+                child: TextField(
+                  controller: datecontroller,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.date_range),
+                      labelText: " TO Date "),
+                  readOnly: true,
+                  onTap: () {
+                    firstDate(context);
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30, 30, 30, 5),
+                child: DropdownButtonFormField<String>(
+                  value: selectedTransactionOptions,
+                  onChanged: (value) {
+                    setstste(() {
+                      selectedTransactionOptions = value;
+                    });
+                  },
+                  items: TransactionOptions.map((option) {
+                    return DropdownMenuItem(
+                      value: option,
+                      child: Text(option),
+                    );
+                  }).toList(),
+                  decoration: const InputDecoration(
+                    labelText: "Transaction Type",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
+                child: DropdownButtonFormField<String>(
+                  value: selectedCurrencyOptions,
+                  onChanged: (value) {
+                    setstste(() {
+                      selectedCurrencyOptions = value;
+                    });
+                  },
+                  items: CurrencyOptions.map((option) {
+                    return DropdownMenuItem(
+                      value: option,
+                      child: Text(option),
+                    );
+                  }).toList(),
+                  decoration: const InputDecoration(
+                    labelText: "Currency Type",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.search_outlined),
+                iconSize: 35.0,
+              ),
+            ],
+          ),
+        ),
       ),
     );
+  }
+
+  Future<void> firstDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2100));
+
+    //  String formattedDate = DateFormat('yyyy-MM-dd').format(picked);
+    //  datecontroller.text = formattedDate;
   }
 }
 

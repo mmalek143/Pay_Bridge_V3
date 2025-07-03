@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomButton(
                       text: "LOGIN",
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           PageTransition(
                             type: PageTransitionType.fade,
@@ -77,37 +77,39 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 20),
 
                     // Register Link
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "YOU DON'T HAVE AN ACCOUNT? | ",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.fade,
-                                child: const RegisterScreen(),
-                                duration: Duration(milliseconds: 400),
+                    SizedBox(
+                        width: size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "YOU DON'T HAVE AN ACCOUNT? | ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
                               ),
-                            );
-                          },
-                          child: const Text(
-                            "REGISTER NOW",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.fade,
+                                    child: const RegisterScreen(),
+                                    duration: Duration(milliseconds: 400),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                "REGISTER NOW",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
                   ],
                 ),
               ),
