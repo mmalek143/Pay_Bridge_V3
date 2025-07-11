@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:pay_bridge/components/date_dialog.dart';
+
 import 'package:pay_bridge/home_page_screen.dart';
 import 'package:pay_bridge/profile_page.dart';
+import 'package:pay_bridge/scan_qr_page.dart';
 import 'package:pay_bridge/transaction.dart';
 
 class Homepage extends StatefulWidget {
@@ -29,9 +30,8 @@ class _HomepageState extends State<Homepage> {
           HomePageScreen(
             size: size,
           ),
-          //  ScanQRPage(),
-          DateDialog(size: size),
-          Transaction(),
+          QRViewExample(),
+          TransactionsPage(),
           ProfilePage(
               size: size, customerName: " malek", customerEmail: "malekab@edu"),
         ],

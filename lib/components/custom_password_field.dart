@@ -4,13 +4,14 @@ class CustomPasswordField extends StatefulWidget {
   final String hintText;
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
+  final String? text;
 
-  const CustomPasswordField({
-    super.key,
-    required this.hintText,
-    this.controller,
-    this.validator,
-  });
+  const CustomPasswordField(
+      {super.key,
+      required this.hintText,
+      this.controller,
+      this.validator,
+      this.text});
 
   @override
   State<CustomPasswordField> createState() => _CustomPasswordFieldState();

@@ -117,14 +117,8 @@ copyWith() تنشئ نسخة جديدة من الإشعار مع تحديث خا
 
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Color(0xffffffff)),
-        backgroundColor: const Color(0xFF107B81),
-        title: const Text(
-          "الإشعارات",
-          style: TextStyle(
-            fontSize: 24,
-            color: Color(0xffffffff),
-          ),
+        title: Text(
+          "Notification",
         ),
         centerTitle: true,
       ),

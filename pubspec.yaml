@@ -14,6 +14,16 @@ dependencies:
   bottom_bar: ^2.0.3
   google_nav_bar: ^5.0.7
   shared_preferences: ^2.5.3
+  #to save qr code in file 
+  path_provider: ^2.1.5
+  #to generate qr code 
+  qr_flutter: ^4.1.0
+  # to show qr code 
+  flutter_svg: ^2.2.0
+  #to scan qr code
+  qr_code_scanner_plus: ^2.0.10+1
+  animated_custom_dropdown: 3.1.1
+  searchfield: ^1.3.2
 
 dev_dependencies:
   flutter_launcher_icons: "^0.14.4"

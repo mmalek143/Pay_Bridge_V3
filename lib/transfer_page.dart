@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pay_bridge/components/animated_custom_dropdown.dart';
+import 'package:pay_bridge/components/custom_text_field.dart';
 
 class TransferMoneyPage extends StatefulWidget {
   const TransferMoneyPage({super.key});
@@ -10,8 +12,6 @@ class TransferMoneyPage extends StatefulWidget {
 class _TransferMoneyPageState extends State<TransferMoneyPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _recipientIdController = TextEditingController();
-  final TextEditingController _recipientNameController =
-      TextEditingController();
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
@@ -27,7 +27,7 @@ class _TransferMoneyPageState extends State<TransferMoneyPage> {
   @override
   void dispose() {
     _recipientIdController.dispose();
-    _recipientNameController.dispose();
+
     _amountController.dispose();
     _noteController.dispose();
     super.dispose();
@@ -35,30 +35,14 @@ class _TransferMoneyPageState extends State<TransferMoneyPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Transfer Money",
-          style: TextStyle(
-            color: Color.fromARGB(
-              255,
-              255,
-              255,
-              255,
-            ),
-          ),
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFF107B81),
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: Color.fromARGB(
-            255,
-            255,
-            255,
-            255,
-          ),
-        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -68,35 +52,56 @@ class _TransferMoneyPageState extends State<TransferMoneyPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Send Money Securely",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF107B81),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  "Fill in recipient details and transfer amount",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
-                  ),
+                Center(
+                  child: Column(children: [
+                    Container(
+                      width: size.width / 2.5,
+                      height: size.height / 8,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            const Color(0xFF00A3A3).withOpacity(0.2),
+                            const Color(0xFF00A3A3).withOpacity(0.1),
+                          ],
+                        ),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.send_rounded,
+                        size: 60,
+                        color: Color(0xFF00A3A3),
+                      ),
+                    ),
+                    SizedBox(height: size.height / 40),
+                    Text(
+                      "Send Money Securely",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF0C3954),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      "Fill in recipient details and transfer amount",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ]),
                 ),
                 const SizedBox(height: 32),
 
                 // Recipient ID Field
-                TextFormField(
+                CustomTextField(
                   controller: _recipientIdController,
-                  decoration: InputDecoration(
-                    labelText: "Recipient ID",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    prefixIcon: const Icon(Icons.person_outline),
-                    filled: true,
-                    fillColor: Colors.grey[50],
+                  labelText: "Recipient ID",
+                  prefixIcon: const Icon(Icons.person_outline),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -105,53 +110,27 @@ class _TransferMoneyPageState extends State<TransferMoneyPage> {
                     return null;
                   },
                 ),
+
                 const SizedBox(height: 20),
 
-                // Recipient Name Field
-                TextFormField(
-                  controller: _recipientNameController,
-                  decoration: InputDecoration(
-                    labelText: "Recipient Name",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    prefixIcon: const Icon(Icons.person),
-                    filled: true,
-                    fillColor: Colors.grey[50],
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter recipient name';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 20),
-
-                // Amount and Currency Fields
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Amount Field
                     Expanded(
                       flex: 3,
-                      child: TextFormField(
+                      child: CustomTextField(
                         controller: _amountController,
+                        labelText: "Amount",
+                        prefixText: "${_currencySymbols[_selectedCurrency]!} ",
+                        prefixStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.black),
                         keyboardType:
                             TextInputType.numberWithOptions(decimal: true),
-                        decoration: InputDecoration(
-                          labelText: "Amount",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          prefixText:
-                              "${_currencySymbols[_selectedCurrency]!} ",
-                          prefixStyle: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.black),
-                          filled: true,
-                          fillColor: Colors.grey[50],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -169,60 +148,37 @@ class _TransferMoneyPageState extends State<TransferMoneyPage> {
                     // Currency Dropdown
                     Expanded(
                       flex: 2,
-                      child: InputDecorator(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          filled: true,
-                          fillColor: Colors.grey[50],
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 4),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: _selectedCurrency,
-                            icon: const Icon(Icons.arrow_drop_down),
-                            elevation: 0,
-                            isExpanded: true,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                            ),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                _selectedCurrency = newValue!;
-                              });
-                            },
-                            items: _currencies
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
+                        child: SimpleDropdown(
+                          items: _currencies,
+                          initialItem: _selectedCurrency,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedCurrency = value;
+                            });
+                          },
                         ),
                       ),
                     ),
                   ],
                 ),
+
                 const SizedBox(height: 20),
 
-                // Note Field
-                TextFormField(
+                CustomTextField(
                   controller: _noteController,
-                  maxLines: 3,
-                  decoration: InputDecoration(
-                    labelText: "Note (optional)",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    filled: true,
-                    fillColor: Colors.grey[50],
-                    alignLabelWithHint: true,
+                  labelText: "Note (optional)",
+                  //     maxLines: 3,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
+                  alignLabelWithHint: true,
                 ),
+
                 const SizedBox(height: 40),
 
                 // Transfer Button
@@ -271,7 +227,7 @@ class _TransferMoneyPageState extends State<TransferMoneyPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            "Transferred ${_currencySymbols[_selectedCurrency]}${_amountController.text} to ${_recipientNameController.text}",
+            "Transferred ${_currencySymbols[_selectedCurrency]}${_amountController.text}",
             style: const TextStyle(fontSize: 16),
           ),
           backgroundColor: const Color(0xFF107B81),

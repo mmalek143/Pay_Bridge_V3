@@ -4,6 +4,7 @@ import 'package:pay_bridge/components/button_center_homrpage.dart';
 import 'package:pay_bridge/components/card.dart';
 import 'package:pay_bridge/create_account_currency.dart';
 import 'package:pay_bridge/notification.dart';
+import 'package:pay_bridge/components/transaction_item.dart';
 
 class HomePageScreen extends StatefulWidget {
   final Size size;
@@ -41,7 +42,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
     {
       'title': 'GENERATE QR',
       'icon': Icons.qr_code_2_rounded,
-      'route': 'qr_page'
+      'route': 'generate_qr_page'
     },
     {
       'title': 'REQUESTS',
@@ -74,8 +75,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
     final unit = widget.size.shortestSide * 0.02;
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
+        elevation: 0,
         title: Padding(
           padding: EdgeInsets.only(top: unit),
           child: Row(
@@ -103,7 +107,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
       body: RefreshIndicator(
         onRefresh: _refreshData,
         color: const Color(0xFF00A3A3),
-        backgroundColor: const Color(0xFFE6F0FF),
+        backgroundColor: const Color(0xFFF8F9FA),
         strokeWidth: 3,
         displacement: unit * 4,
         child: ListView(
@@ -222,15 +226,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                 itemBuilder: (context, index) {
                                   final transaction =
                                       cardTransactions[selectedIndex][index];
-                                  return transaction['type'] == 'in'
-                                      ? transferIn(
-                                          widget.size,
-                                          transaction['amount'],
-                                          transaction['date'])
-                                      : tranferOut(
-                                          widget.size,
-                                          transaction['amount'],
-                                          transaction['date']);
+
+                                  return TransactionItem.buildItem(
+                                    size: widget.size,
+                                    type: transaction['type'],
+                                    amount: transaction['amount'],
+                                    date: transaction['date'],
+                                  );
                                 },
                               ),
                             ),
