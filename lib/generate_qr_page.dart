@@ -62,6 +62,7 @@ class _GenerateQrPageEnhancedState extends State<GenerateQrPage> {
     final unit = size.shortestSide * 0.02;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Generate QR'),
         centerTitle: true,
@@ -180,9 +181,6 @@ class _GenerateQrPageEnhancedState extends State<GenerateQrPage> {
             prefixStyle: const TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
             keyboardType: TextInputType.numberWithOptions(decimal: true),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter amount';
@@ -197,16 +195,11 @@ class _GenerateQrPageEnhancedState extends State<GenerateQrPage> {
             },
           ),
         ),
-        const SizedBox(width: 16),
+        const SizedBox(width: 12),
 
         // Currency Dropdown
         Expanded(
-          flex: 2,
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(12),
-            ),
+            flex: 3,
             child: SimpleDropdown(
               items: _currencies,
               initialItem: _selectedCurrency,
@@ -215,9 +208,7 @@ class _GenerateQrPageEnhancedState extends State<GenerateQrPage> {
                   _selectedCurrency = value;
                 });
               },
-            ),
-          ),
-        ),
+            ))
       ],
     );
   }

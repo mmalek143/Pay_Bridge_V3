@@ -23,7 +23,8 @@ dependencies:
   #to scan qr code
   qr_code_scanner_plus: ^2.0.10+1
   animated_custom_dropdown: 3.1.1
-  searchfield: ^1.3.2
+  calendar_date_picker2: ^2.0.1
+ 
 
 dev_dependencies:
   flutter_launcher_icons: "^0.14.4"

@@ -60,6 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: CustomTextField(
                               hintText: 'First Name',
                               validator: _requiredValidator,
+                              keyboardType: TextInputType.name,
                             ),
                           ),
                           const SizedBox(width: 10),
@@ -67,6 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: CustomTextField(
                               hintText: 'Last Name',
                               validator: _requiredValidator,
+                              keyboardType: TextInputType.name,
                             ),
                           ),
                         ],
@@ -78,6 +80,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Username is required';
+                          }
+                          if (value.length < 5) {
+                            return 'Minimum 5 characters';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 15),
+                      CustomTextField(
+                        hintText: 'Personal proof number ',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Personal proof number  is required';
                           }
                           if (value.length < 5) {
                             return 'Minimum 5 characters';

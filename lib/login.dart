@@ -49,10 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     // Username Field
                     CustomTextField(
                       hintText: "USERNAME",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide.none,
-                      ),
+                      borderRadiusCustom: BorderRadius.circular(20),
                     ),
                     const SizedBox(height: 15),
 
