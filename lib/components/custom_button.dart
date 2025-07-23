@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
+  final Widget child;
 
   const CustomButton({
     super.key,
-    required this.text,
     required this.onPressed,
+    required this.child,
   });
 
   @override
@@ -19,15 +19,12 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
-          foregroundColor: Color.fromRGBO(12, 57, 84, 1.0),
+          foregroundColor: const Color.fromRGBO(12, 57, 84, 1.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
         ),
-        child: Text(
-          text,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
+        child: child,
       ),
     );
   }

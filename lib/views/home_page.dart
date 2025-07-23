@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-import 'package:pay_bridge/home_page_screen.dart';
-import 'package:pay_bridge/profile_page.dart';
-import 'package:pay_bridge/scan_qr_page.dart';
-import 'package:pay_bridge/transaction.dart';
+import 'package:pay_bridge/views/home_page_screen.dart';
+import 'package:pay_bridge/views/profile_page.dart';
+import 'package:pay_bridge/views/scan_qr_page.dart';
+import 'package:pay_bridge/views/transaction.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});

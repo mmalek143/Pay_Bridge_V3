@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pay_bridge/CreateAccountDetailsPage.dart';
+import 'package:pay_bridge/views/CreateAccountDetailsPage.dart';
 
 class CreateAccountCurrency extends StatelessWidget {
   final Function(String)? onAccountCreated;

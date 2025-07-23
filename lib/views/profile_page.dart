@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:pay_bridge/login.dart';
+import './login.dart';
+import 'package:pay_bridge/provider/auth_provider.dart';
 
 class ProfilePage extends StatefulWidget {
   final Size size;
@@ -23,6 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
   bool biometricEnabled = false;
   String selectedLanguage = 'Arabic';
   String selectedMode = 'Light';
+  final AuthProvider auth = AuthProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -545,6 +547,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 (route) => false,
               );
+              //  auth.logout();
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             child: const Text('Logout', style: TextStyle(color: Colors.white)),

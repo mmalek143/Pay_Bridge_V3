@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pay_bridge/components/button_center_homrpage.dart';
 import 'package:pay_bridge/components/card.dart';
-import 'package:pay_bridge/create_account_currency.dart';
-import 'package:pay_bridge/notification.dart';
+import 'package:pay_bridge/views/create_account_currency.dart';
+import 'package:pay_bridge/views/notification.dart';
 import 'package:pay_bridge/components/transaction_item.dart';
 
 class HomePageScreen extends StatefulWidget {
